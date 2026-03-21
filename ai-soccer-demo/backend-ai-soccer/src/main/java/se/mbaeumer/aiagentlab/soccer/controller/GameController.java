@@ -22,4 +22,8 @@ public class GameController {
         return gameStateService.initGame();
     }
 
+    public void startGame(){
+        gameStateService.startGame();
+    }
+
 }

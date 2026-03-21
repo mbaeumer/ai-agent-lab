@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import se.mbaeumer.aiagentlab.soccer.model.Ball;
 import se.mbaeumer.aiagentlab.soccer.model.Game;
+import se.mbaeumer.aiagentlab.soccer.model.GameStatus;
 import se.mbaeumer.aiagentlab.soccer.model.Goal;
 import se.mbaeumer.aiagentlab.soccer.model.Pitch;
 import se.mbaeumer.aiagentlab.soccer.model.Player;
@@ -12,6 +13,12 @@ import se.mbaeumer.aiagentlab.soccer.model.Position;
 
 @Service
 public class GameStateService {
+
+  private final SimulationStateHolder stateHolder;
+
+  public GameStateService(SimulationStateHolder stateHolder) {
+    this.stateHolder = stateHolder;
+  }
 
   public Game initGame() {
     // Initialize game state, players, ball position, etc.
@@ -24,9 +31,18 @@ public class GameStateService {
     Pitch pitch = new Pitch(800, 800);
     Goal goal = new Goal(new Position(400, 0));
 
-    Game game = new Game(pitch, player1, ball, goal);
+    Game game = new Game(pitch, player1, ball, goal, GameStatus.NOT_STARTED);
 
+    stateHolder.update(game);
     return game;
+  }
+
+  public void startGame(){
+    Game game = stateHolder.get();
+    if (game != null) {
+      game.setGameStatus(GameStatus.IN_PROGRESS);
+      stateHolder.update(game);
+    }
   }
 
   public static double squaredDistance(double x1, double y1, double x2, double y2) {

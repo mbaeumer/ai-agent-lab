@@ -5,12 +5,14 @@ public class Game {
     private Player player;
     private Ball ball;
     private Goal goal;
+    private GameStatus gameStatus;
 
-    public Game(Pitch pitch, Player player, Ball ball, Goal goal) {
+    public Game(Pitch pitch, Player player, Ball ball, Goal goal, GameStatus gameStatus) {
         this.pitch = pitch;
         this.player = player;
         this.ball = ball;
         this.goal = goal;
+        this.gameStatus = gameStatus;
     }
 
     public Pitch getPitch() {
@@ -37,4 +39,11 @@ public class Game {
         this.ball = ball;
     }
 
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
 }
