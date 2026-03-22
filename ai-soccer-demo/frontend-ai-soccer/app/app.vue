@@ -38,6 +38,16 @@ async function initGame() { // NEW
     console.error("Backend error", error)
   }
 }
+
+async function startGame() { // NEW
+  try {
+    await $fetch('http://localhost:8080/api/game/start', {
+      method: 'POST'
+    })
+  } catch (error) {
+    console.error("Backend error", error)
+  }
+}
 </script>
 
 <template>
@@ -51,6 +61,7 @@ async function initGame() { // NEW
           <button @click="moveRight">Move player right ➡️</button>
           <button @click="movePlayerFromBackend">Move player</button>
           <button @click="initGame">Init game</button>
+          <button @click="startGame">Start game</button>
         </div>
         <ClientOnly>
           <CanvasBoard 
