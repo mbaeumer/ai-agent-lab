@@ -15,12 +15,15 @@ const props = defineProps({
   height: { type: Number, default: 1000 },
   newPlayerPosition: Object,
   moveRightTrigger: Number,
-  moveVector: Object
+  moveVector: Object,
+  game: Object
 })
 
 const canvasRef = ref(null)
 let ctx = null
 let animationId = null
+
+let my_ball = null
 
 const ball = {
   x: 100,
@@ -47,7 +50,15 @@ function update() {
 
 function drawBall() {
   ctx.beginPath()
-  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2)
+  ctx.arc(ball.x, ball.y, 10, 0, Math.PI * 2)
+  ctx.fillStyle = 'white'
+  ctx.fill()
+}
+
+function drawMyBall() {
+  if (!my_ball) return
+  ctx.beginPath()
+  ctx.arc(my_ball.position.x, my_ball.position.y, 10, 0, Math.PI * 2)
   ctx.fillStyle = 'white'
   ctx.fill()
 }
@@ -63,7 +74,7 @@ function drawe_middle(){
 
 function draw_player(player){
   ctx.beginPath()
-  ctx.arc(player.x, player.y, 15, 0, Math.PI * 2)
+  ctx.arc(player.position.x, player.position.y, 15, 0, Math.PI * 2)
   ctx.fillStyle = 'red'
   ctx.fill()
 }
@@ -73,6 +84,7 @@ function loop() {
   update()
   drawBall()
   drawe_middle()
+  drawMyBall()
   players.forEach(player => draw_player(player))
 
   animationId = requestAnimationFrame(loop)
@@ -111,8 +123,23 @@ watch(() => props.moveVector, (vec) => { // NEW
 
   const player = players[0]               // NEW
 
-  player.x += vec.dx                      // NEW
-  player.y += vec.dy                      // NEW
+  player.position.x += vec.dx                      // NEW
+  player.position.y += vec.dy                      // NEW
+})
+
+watch(() => props.game, (my_game) => { 
+  if (!my_game) return            
+  my_ball = my_game.ball       
+  const player = my_game.player
+  players.push(player)
+  /*
+  if (players.length === 0) return       
+
+  const player = players[0]              
+
+  player.x += vec.dx                     
+  player.y += vec.dy                     
+  */
 })
 </script>
 

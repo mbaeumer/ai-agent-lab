@@ -4,6 +4,7 @@ import { ref } from 'vue'
 const newPlayerPosition = ref(null)
 const moveRightTrigger = ref(0)
 const moveVector = ref(null)
+const game = ref(null)
 
 function addPlayer() {
   newPlayerPosition.value = {
@@ -26,6 +27,17 @@ async function movePlayerFromBackend() { // NEW
     console.error("Backend error", error)
   }
 }
+
+async function initGame() { // NEW
+  try {
+    const result = await $fetch('http://localhost:8080/api/game/init') // NEW
+
+    game.value = result // NEW (expected {dx, dy})
+
+  } catch (error) {
+    console.error("Backend error", error)
+  }
+}
 </script>
 
 <template>
@@ -38,6 +50,7 @@ async function movePlayerFromBackend() { // NEW
           <button @click="addPlayer">Add player</button>
           <button @click="moveRight">Move player right ➡️</button>
           <button @click="movePlayerFromBackend">Move player</button>
+          <button @click="initGame">Init game</button>
         </div>
         <ClientOnly>
           <CanvasBoard 
@@ -46,6 +59,7 @@ async function movePlayerFromBackend() { // NEW
             :newPlayerPosition="newPlayerPosition" 
             :moveRightTrigger="moveRightTrigger"
             :moveVector="moveVector"
+            :game="game"
             />
         </ClientOnly>
       </div>
