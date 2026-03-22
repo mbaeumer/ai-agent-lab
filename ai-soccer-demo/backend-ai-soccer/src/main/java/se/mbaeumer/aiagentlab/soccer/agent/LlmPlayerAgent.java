@@ -3,7 +3,6 @@ package se.mbaeumer.aiagentlab.soccer.agent;
 import org.springframework.stereotype.Component;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
-import se.mbaeumer.aiagentlab.soccer.model.Decision;
 import se.mbaeumer.aiagentlab.soccer.model.PlayerPerception;
 
 @Component
@@ -16,7 +15,7 @@ public class LlmPlayerAgent implements PlayerAgent {
     }
 
     @Override
-    public Decision decide(PlayerPerception perception) {
+    public String decide(PlayerPerception perception) {
 
         String prompt = """
         You are a soccer player in a simulation.
@@ -26,17 +25,18 @@ public class LlmPlayerAgent implements PlayerAgent {
         Return JSON:
 
         {
-          "action": "MOVE | PASS | SHOOT | HOLD",
-          "targetPlayerId": "optional",
+          "action": "RUN_TO_BALL|KICK_BALL|DRIBBLE |PASS_BALL",
           "intensity": 0.0-1.0
         }
 
         Game state:
-        """ + perception.toString();
+        """ + perception.toJson();
 
         String response = model.generate(prompt);
 
-        return null; //DecisionParser.parse(response);
+        return response; //DecisionParser.parse(response);
     }
+
+    
 
 }

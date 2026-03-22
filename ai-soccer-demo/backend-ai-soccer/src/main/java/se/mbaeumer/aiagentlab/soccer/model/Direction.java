@@ -1,17 +1,17 @@
 package se.mbaeumer.aiagentlab.soccer.model;
 
 public class Direction {
-    private int deltaX;
-    private int deltaY;
+    private double deltaX;
+    private double deltaY;
 
-    private Direction(int deltaX, int deltaY) {
+    private Direction(double deltaX, double deltaY) {
         this.deltaX = deltaX;
         this.deltaY = deltaY;
     }
 
     public static Direction fromPositions(Position from, Position to) {
-        int deltaX = to.x() - from.x();
-        int deltaY = to.y() - from.y();
+        double deltaX = to.x() - from.x();
+        double deltaY = to.y() - from.y();
         return new Direction(deltaX, deltaY);
     }
 
@@ -20,9 +20,13 @@ public class Direction {
         if (length == 0) {
             return new Direction(0, 0);
         }
-        return new Direction((int)(deltaX / length), (int)(deltaY / length));
+        return new Direction(deltaX / length, deltaY / length);
     }
 
+    public Direction scale(double factor) {
+        return new Direction(deltaX * factor, deltaY * factor);
+    }
 
-
+    public double deltaX() { return deltaX; }
+    public double deltaY() { return deltaY; }
 }

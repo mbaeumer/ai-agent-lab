@@ -46,4 +46,11 @@ public class Player {
         this.position = position;
     }
 
+    public void move(Direction direction) {
+        this.position = new Position(
+                (int) (this.position.x() + direction.deltaX()),
+                (int) (this.position.y() + direction.deltaY())
+        );
+    }
+
 }

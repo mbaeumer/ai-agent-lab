@@ -46,4 +46,8 @@ public class Game {
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
+
+    public Goal getGoal() {
+        return goal;
+    }
 }

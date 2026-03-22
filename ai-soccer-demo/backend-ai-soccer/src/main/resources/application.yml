@@ -1,8 +1,11 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
 ai:
   provider: openai
   local:
     base-url: http://localhost:11434
     model: llama3
   openai:
-    api-key: test-key
+    api-key: ${OPENAI_API_KEY}
     model: gpt-5-mini

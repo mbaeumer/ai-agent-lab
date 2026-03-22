@@ -1,6 +1,8 @@
 package se.mbaeumer.aiagentlab.soccer.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,19 +13,19 @@ import se.mbaeumer.aiagentlab.soccer.service.GameStateService;
 @RestController
 @RequestMapping("/api/game")
 public class GameController {
-    private final GameStateService gameStateService;
+  private final GameStateService gameStateService;
 
-    public GameController(GameStateService gameStateService) {
-        this.gameStateService = gameStateService;
-    }
+  public GameController(GameStateService gameStateService) {
+    this.gameStateService = gameStateService;
+  }
 
-    @RequestMapping("/init")
-    public Game initGame(){
-        return gameStateService.initGame();
-    }
+  @GetMapping("/init")
+  public Game initGame() {
+    return gameStateService.initGame();
+  }
 
-    public void startGame(){
-        gameStateService.startGame();
-    }
-
+  @PostMapping("/start")
+  public void startGame() {
+    gameStateService.startGame();
+  }
 }
