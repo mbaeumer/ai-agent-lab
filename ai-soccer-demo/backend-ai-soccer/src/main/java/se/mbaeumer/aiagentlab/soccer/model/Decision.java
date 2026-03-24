@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Decision {
 
-    private String action;
+    private PlayerAction action;
     private double intensity;
 
-    public String getAction() {
+    public PlayerAction getAction() {
         return action;
     }
 
-    public void setAction(String action) {
+    public void setAction(PlayerAction action) {
         this.action = action;
     }
 

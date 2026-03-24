@@ -8,10 +8,10 @@ public class DecisionTest {
 
     @Test
     public void testFromJson() {
-        String json = "{\"action\":\"MOVE\",\"intensity\":0.8}";
+        String json = "{\"action\":\"RUN_TO_BALL\",\"intensity\":0.8}";
         Decision decision = Decision.fromAgentResponse(json);
         assertNotNull(decision);
-        //assert "MOVE".equals(decision.getAction());
+        assertEquals(PlayerAction.RUN_TO_BALL, decision.getAction());
         assertEquals(0.8, decision.getIntensity());
     }
 
