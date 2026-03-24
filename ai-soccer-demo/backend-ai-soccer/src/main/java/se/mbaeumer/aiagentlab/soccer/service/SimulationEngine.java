@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import se.mbaeumer.aiagentlab.soccer.agent.PlayerAgent;
 import se.mbaeumer.aiagentlab.soccer.model.Ball;
-import se.mbaeumer.aiagentlab.soccer.model.Decision;
 import se.mbaeumer.aiagentlab.soccer.model.Direction;
 import se.mbaeumer.aiagentlab.soccer.model.Game;
 import se.mbaeumer.aiagentlab.soccer.model.Goal;
@@ -65,7 +64,7 @@ public class SimulationEngine {
             player.getPosition().y(),
             goal.getPosition().x(),
             goal.getPosition().y());
-    boolean hasBallControl = distanceToBall < 10; // Example threshold for ball control
+    boolean hasBallControl = distanceToBall < 25; // Example threshold for ball control
 
     PlayerPerception perception = new PlayerPerception();
     perception.setDistanceToBall(distanceToBall);
@@ -75,7 +74,7 @@ public class SimulationEngine {
     String response = agent.decide(perception);
 
     logger.log(System.Logger.Level.INFO, response);
-    Decision decision = Decision.fromAgentResponse(response);
+    //Decision decision = Decision.fromAgentResponse(response);
 
     Direction direction = Direction.fromPositions(player.getPosition(), ball.getPosition()).getNormalized();
     direction = direction.getNormalized().scale(distanceToBall * 0.3);

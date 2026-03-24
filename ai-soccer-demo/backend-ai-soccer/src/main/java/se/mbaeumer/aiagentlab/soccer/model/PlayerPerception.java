@@ -36,7 +36,7 @@ public class PlayerPerception {
     ObjectMapper mapper = new ObjectMapper();
     try {
       String json = mapper.writeValueAsString(this);
-      System.out.println(json);
+      return json;
     } catch (Exception e) {
       e.printStackTrace();
     }

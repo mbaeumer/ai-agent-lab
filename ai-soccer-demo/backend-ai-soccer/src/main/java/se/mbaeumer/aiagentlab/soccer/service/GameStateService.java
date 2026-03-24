@@ -22,10 +22,10 @@ public class GameStateService {
 
   public Game initGame() {
     // Initialize game state, players, ball position, etc.
-    Position ballStartPosition = new Position(50, 50);
+    Position ballStartPosition = new Position(250, 280);
     Ball ball = new Ball(ballStartPosition);
 
-    Position player1StartPosition = new Position(400, 400);
+    Position player1StartPosition = new Position(350, 400);
     Player player1 = new Player("Player 1", PlayerRole.FORWARD, player1StartPosition);
 
     Pitch pitch = new Pitch(800, 800);
@@ -43,6 +43,10 @@ public class GameStateService {
       game.setGameStatus(GameStatus.IN_PROGRESS);
       stateHolder.update(game);
     }
+  }
+
+  public Game getCurrentState() {
+    return stateHolder.get();
   }
 
   public static double squaredDistance(double x1, double y1, double x2, double y2) {

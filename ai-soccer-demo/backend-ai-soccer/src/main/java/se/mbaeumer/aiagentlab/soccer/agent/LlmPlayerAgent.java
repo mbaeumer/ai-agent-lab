@@ -20,12 +20,11 @@ public class LlmPlayerAgent implements PlayerAgent {
         String prompt = """
         You are a soccer player in a simulation.
 
-        Decide the next action.
-
+        Decide the next action. 
         Return JSON:
 
         {
-          "action": "RUN_TO_BALL|KICK_BALL|DRIBBLE |PASS_BALL",
+          "action": "<action>",
           "intensity": 0.0-1.0
         }
 

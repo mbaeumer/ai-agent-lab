@@ -28,4 +28,9 @@ public class GameController {
   public void startGame() {
     gameStateService.startGame();
   }
+
+  @GetMapping("/state")
+  public Game getCurrentState() {
+    return gameStateService.getCurrentState();
+  }
 }
