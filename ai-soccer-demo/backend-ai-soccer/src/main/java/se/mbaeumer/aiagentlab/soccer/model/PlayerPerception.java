@@ -7,6 +7,7 @@ public class PlayerPerception {
   private double distanceToBall;
   private double distanceToGoal;
   private boolean hasBall;
+  private boolean isAllowedToKickBall;
 
   public double getDistanceToBall() {
     return distanceToBall;
@@ -32,10 +33,15 @@ public class PlayerPerception {
     this.hasBall = hasBall;
   }
 
+  public boolean isAllowedToKickBall() {
+    return hasBall && distanceToGoal < 150; // Example logic: can kick if has ball and is within 150 units of the goal
+  }
+
   public String toJson() {
     ObjectMapper mapper = new ObjectMapper();
     try {
       String json = mapper.writeValueAsString(this);
+      System.out.println("PlayerPerception JSON: " + json);
       return json;
     } catch (Exception e) {
       e.printStackTrace();

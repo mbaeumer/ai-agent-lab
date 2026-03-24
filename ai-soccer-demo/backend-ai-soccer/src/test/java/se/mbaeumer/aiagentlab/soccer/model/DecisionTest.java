@@ -14,5 +14,4 @@ public class DecisionTest {
         assertEquals(PlayerAction.RUN_TO_BALL, decision.getAction());
         assertEquals(0.8, decision.getIntensity());
     }
-
 }

@@ -6,10 +6,13 @@ public class Decision {
 
     private PlayerAction action;
     private double intensity;
+    private String explanation;
 
     public PlayerAction getAction() {
         return action;
     }
+
+
 
     public void setAction(PlayerAction action) {
         this.action = action;
@@ -31,5 +34,13 @@ public class Decision {
             e.printStackTrace();
             return null;    
         }
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 }

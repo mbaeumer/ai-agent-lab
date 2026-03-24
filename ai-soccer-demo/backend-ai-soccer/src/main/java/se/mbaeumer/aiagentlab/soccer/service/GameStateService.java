@@ -22,7 +22,7 @@ public class GameStateService {
 
   public Game initGame() {
     // Initialize game state, players, ball position, etc.
-    Position ballStartPosition = new Position(250, 280);
+    Position ballStartPosition = new Position(250, 180);
     Ball ball = new Ball(ballStartPosition);
 
     Position player1StartPosition = new Position(350, 400);
