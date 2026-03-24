@@ -1,10 +1,33 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const newPlayerPosition = ref(null)
 const moveRightTrigger = ref(0)
 const moveVector = ref(null)
 const game = ref(null)
+
+let running = true
+
+onMounted(() => {
+  const poll = async () => {
+    while (running) {
+      try {
+        const res = await $fetch('http://localhost:8080/api/game/state')
+        game.value = res
+      } catch (e) {
+        console.error(e)
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 1000))
+    }
+  }
+
+  poll()
+})
+
+onUnmounted(() => {
+  running = false
+})
 
 function addPlayer() {
   newPlayerPosition.value = {

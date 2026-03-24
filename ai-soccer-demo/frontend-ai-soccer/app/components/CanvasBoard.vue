@@ -131,15 +131,11 @@ watch(() => props.game, (my_game) => {
   if (!my_game) return            
   my_ball = my_game.ball       
   const player = my_game.player
-  players.push(player)
-  /*
-  if (players.length === 0) return       
-
-  const player = players[0]              
-
-  player.x += vec.dx                     
-  player.y += vec.dy                     
-  */
+  if (players.length === 0){
+    players.push(player)
+  }else{
+    players[0] = player
+  }
 })
 </script>
 
