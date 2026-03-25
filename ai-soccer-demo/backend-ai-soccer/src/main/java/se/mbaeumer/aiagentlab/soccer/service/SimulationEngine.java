@@ -1,5 +1,7 @@
 package se.mbaeumer.aiagentlab.soccer.service;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.stereotype.Component;
 
 import se.mbaeumer.aiagentlab.soccer.agent.PlayerAgent;
@@ -151,13 +153,20 @@ public class SimulationEngine {
             goal.getPosition().x(),
             goal.getPosition().y());
 
+    double scaleFactor = 0;
+    if (distanceFromBallToGoal > 250) { // Too far to kick effectively
+      scaleFactor = ThreadLocalRandom.current().nextDouble(0.2, 0.5);
+    } else if (distanceFromBallToGoal > 100) {
+      scaleFactor = ThreadLocalRandom.current().nextDouble(0.5, 1.2);
+    } else if (distanceFromBallToGoal < 50){
+      scaleFactor = ThreadLocalRandom.current().nextDouble(0.9, 1.3);
+    }
     // Direction from ball to goal
     Direction direction =
         Direction.fromPositions(ball.getPosition(), goal.getPosition())
             .getNormalized()
-            .scale(distanceFromBallToGoal * 0.5); // Scale for kick strength
+            .scale(distanceFromBallToGoal * scaleFactor); // Scale for kick strength
 
-    // Apply "kick القوة"
     ball.move(direction);
     state.setBall(ball);
   }
