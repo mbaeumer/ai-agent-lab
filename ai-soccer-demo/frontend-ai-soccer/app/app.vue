@@ -80,9 +80,9 @@ async function startGame() { // NEW
     <main class="layout">
       <div class="game-area">
         <div class="controls">
-          <button @click="addPlayer">Add player</button>
-          <button @click="moveRight">Move player right ➡️</button>
-          <button @click="movePlayerFromBackend">Move player</button>
+          <!--<button @click="addPlayer">Add player</button>-->
+          <!--<button @click="moveRight">Move player right ➡️</button>-->
+          <!--<button @click="movePlayerFromBackend">Move player</button>-->
           <button @click="initGame">Init game</button>
           <button @click="startGame">Start game</button>
         </div>
@@ -98,11 +98,11 @@ async function startGame() { // NEW
         </ClientOnly>
       </div>
 
-      <InfoPanel title="Game Info">
+      <StatusPanel title="Game Info" :decisions="game?.decisions || []">
         <p>Welcome to the soccer game.</p>
         <p>Click on the field to interact.</p>
         <p>Score: 0 - 0</p>
-      </InfoPanel>
+      </StatusPanel>
     </main>
   </div>
 </template>

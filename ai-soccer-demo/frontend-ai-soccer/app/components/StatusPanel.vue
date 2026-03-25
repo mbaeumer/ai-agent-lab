@@ -1,11 +1,15 @@
 <template>
-  <aside class="panel">
-    <h2 class="title">{{ title }}</h2>
+  <div class="info-panel">
+    <h2>{{ title }}</h2>
 
-    <div class="content">
-      <slot />
-    </div>
-  </aside>
+    <ul>
+      <li v-for="(d, index) in decisions" :key="index">
+        {{ d.action }}
+      </li>
+    </ul>
+
+    <slot />
+  </div>
 </template>
 
 <script setup>
@@ -13,6 +17,10 @@ defineProps({
   title: {
     type: String,
     default: "Information"
+  },
+  decisions: {
+    type: Array,
+    default: () => []
   }
 })
 </script>
@@ -31,5 +39,10 @@ defineProps({
 
 .content {
   line-height: 1.6;
+}
+
+.info-panel {
+  max-height: 750px;
+  overflow-y: scroll;
 }
 </style>
